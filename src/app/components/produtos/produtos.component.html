@@ -1,0 +1,94 @@
+<div class="container py-4">
+  <div class="card shadow p-4 rounded-4 mx-auto" style="max-width: 900px;">
+    <h4 class="text-center mb-4">
+      <i class="bi bi-box-seam me-2"></i>
+      Lista de Produtos
+    </h4>
+
+    <div class="table-responsive">
+      <table class="table table-bordered text-center align-middle">
+        <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>Código</th>
+          <th>Descrição</th>
+          <th>Departamento</th>
+          <th>Preço</th>
+          <th>Status</th>
+          <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let d of produtos">
+          <td>{{ d.id }}</td>
+          <td>{{ d.code }}</td>
+          <td>{{ d.description }}</td>
+          <td>{{ d.department }}</td>
+          <td>{{ d.price | currency:'BRL' }}</td>
+          <td>
+              <span class="badge" [ngClass]="{ 'bg-success': d.status, 'bg-secondary': !d.status }">
+                {{ d.status ? 'Ativo' : 'Inativo' }}
+              </span>
+          </td>
+          <td>
+            <button class="btn btn-sm btn-warning me-2" (click)="editar(d)">
+              <i class="bi bi-pencil"></i>
+            </button>
+            <button class="btn btn-sm btn-danger" (click)="deletar(d.id)">
+              <i class="bi bi-trash"></i>
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="d-flex justify-content-center mt-3 gap-2">
+      <button class="btn btn-outline-primary" [disabled]="paginaAtual === 0" (click)="paginaAnterior()">
+        <i class="bi bi-arrow-left-circle"></i> Anterior
+      </button>
+      <button class="btn btn-outline-primary" [disabled]="lastPage" (click)="proximaPagina()">
+        Próximo <i class="bi bi-arrow-right-circle"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Modal de Edição -->
+  <div *ngIf="produtoEditando" class="modal fade show d-block bg-dark bg-opacity-50" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Editar Departamento</h5>
+          <button type="button" class="btn-close" (click)="cancelarEdicao()"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label class="form-label">Código</label>
+              <input type="text" class="form-control" [(ngModel)]="produtoEditando.code" name="code">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Descrição</label>
+              <input type="text" class="form-control" [(ngModel)]="produtoEditando.description" name="description">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Preço</label>
+              <input type="text" class="form-control" [(ngModel)]="produtoEditando.price" name="price">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Status</label>
+              <select class="form-select" [(ngModel)]="produtoEditando.status" name="status">
+                <option [ngValue]="true">Ativo</option>
+                <option [ngValue]="false">Inativo</option>
+              </select>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" (click)="cancelarEdicao()">Cancelar</button>
+          <button class="btn btn-primary" (click)="salvarEdicao()">Salvar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
