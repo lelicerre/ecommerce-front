@@ -60,7 +60,7 @@ export class ProdutosComponent implements OnInit {
     this.produtoEditando = null;
   }
 
-  public deletar(id: number): void {
+  public deletar(id: string): void {
     this.departamentoService.deletar(id).subscribe(() => {
       this.list(this.paginaAtual);
     });

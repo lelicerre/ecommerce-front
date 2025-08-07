@@ -3,7 +3,7 @@ import {Observable, of} from 'rxjs';
 import {HttpClient, HttpParams} from '@angular/common/http';
 
 export interface Produto {
-  id: number;
+  id: string;
   code: string;
   description: string;
   department: string;
@@ -40,7 +40,7 @@ export class ProdutoService {
     return this.http.put<Produto>(`${this.apiUrl}/produtos/${produto.id}`, produto);
   }
 
-  public deletar(id: number): Observable<Produto> {
+  public deletar(id: string): Observable<Produto> {
     return this.http.delete<Produto>(`${this.apiUrl}/produtos/${id}`);
   }
 
