@@ -30,8 +30,8 @@
                 {{ d.status ? 'Ativo' : 'Inativo' }}
               </span>
           </td>
-          <td>
-            <button class="btn btn-sm btn-warning me-2" (click)="editar(d)">
+          <td class="gap-1 d-grid">
+            <button class="btn btn-sm btn-warning  " (click)="editar(d)">
               <i class="bi bi-pencil"></i>
             </button>
             <button class="btn btn-sm btn-danger" (click)="deletar(d.id)">
