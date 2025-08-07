@@ -66,6 +66,7 @@
       <!-- Botão -->
       <div class="d-grid">
         <button type="submit" class="btn btn-success" [disabled]="produtoForm.invalid">Salvar Produto</button>
+        <div *ngIf="salvo" class="alert alert-info mt-2">{{ mensagem }}</div>
       </div>
     </form>
   </div>

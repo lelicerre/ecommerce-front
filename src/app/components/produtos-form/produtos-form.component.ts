@@ -18,7 +18,8 @@ import {Departamento, DepartamentoService} from '../service/departamento.service
 export class ProdutosFormComponent implements OnInit {
   produtoForm!: FormGroup;
   public departamentos: Departamento[] = [];
-
+  public mensagem: string= 'Produto salvo com sucesso!';
+  public salvo: boolean = false;
   constructor(private fb: FormBuilder,
               private produtoService: ProdutoService,
               private departamentoService: DepartamentoService) {
@@ -40,8 +41,10 @@ export class ProdutosFormComponent implements OnInit {
 
   public onSubmit(): void {
     if (this.produtoForm.valid) {
+      this.salvo = true;
       const produto: Produto = this.produtoForm.value;
       this.produtoService.salvar(produto).subscribe(produto => {
+        setTimeout(() => this.salvo = false, 3000)
         this.produtoForm.reset();
       });
     } else {
