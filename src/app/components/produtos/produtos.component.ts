@@ -48,7 +48,6 @@ export class ProdutosComponent implements OnInit {
 
   public salvarEdicao(): void {
     if (this.produtoEditando) {
-      debugger
       this.departamentoService.atualizar(this.produtoEditando).subscribe(() => {
         this.produtoEditando = null;
         this.list(this.paginaAtual);
